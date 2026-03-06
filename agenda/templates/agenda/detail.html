@@ -1,0 +1,9 @@
+<h1>Cita paciente</h1>
+<p>Nombre paciente: {{ paciente.nombre }} {{ paciente.apellido }}</p>
+<ul>
+  {% for cita in paciente.cita_set.all %}
+  <li>Medico: {{ cita.medico }}</li>
+  <li>Fecha: {{ cita.fecha }} {{ cita.hora }}</li>
+  <li>Motivo: {{ cita.motivo }}</li>
+  {% endfor %}
+</ul>
