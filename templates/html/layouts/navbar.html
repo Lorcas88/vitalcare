@@ -1,0 +1,47 @@
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top border-bottom border-light bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url "schedule:index" %}">VitalCare</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                {% if not user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link{% if request.resolver_match.view_name == "accounts:login" %} active" aria-current="page"{% else %}"{% endif %} href="{% url "accounts:login" %}">Iniciar sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link{% if request.resolver_match.view_name == "accounts:register" %} active" aria-current="page"{% else %}"{% endif %} href="{% url "accounts:register" %}">Registrarse</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#">Link</a>
+                    </li>
+                    {% comment %} <li class="nav-item">
+                        <a class="nav-link{% if request.resolver_match.view_name == "schedule:create_patient" %} active" aria-current="page"{% else %}"{% endif %} href="{% url "schedule:create_patient" %}">Registrar paciente</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link{% if request.resolver_match.view_name == "schedule:create_provider" %} active" aria-current="page"{% else %}"{% endif %} href="{% url "schedule:create_provider" %}">Registrar especialista</a>
+                    </li> {% endcomment %}
+                    {% comment %} <li class="nav-item">
+                        <a class="nav-link{% if request.resolver_match.view_name == "schedule:create_appointment" %} active" aria-current="page"{% else %}"{% endif %} href="{% url "schedule:create_appointment" %}">Agendar cita</a>
+                    </li> {% endcomment %}
+                    {% comment %} <li class="nav-item">
+                        <form method="POST" action={% url "accounts:logout" %}>
+                            {% csrf_token %}
+                            {% bootstrap_button "Cerrar sesión" button_type="submit" button_class="btn btn-link nav-link" %}
+                        </form>
+                    </li> {% endcomment %}
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% bootstrap_javascript %}

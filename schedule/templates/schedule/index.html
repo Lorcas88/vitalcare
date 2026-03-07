@@ -1,0 +1,39 @@
+{% extends "html/base.html" %}
+
+<!-- prettier-ignore -->
+
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+
+{% block title %}Agenda{% endblock title %}
+<!-- prettier-ignore -->
+{% block header %}
+{% include "html/layouts/navbar.html" %}
+<h1 class="my-5 py-5 text-center">Agenda</h1>
+{% endblock header %}
+
+<!-- prettier-ignore -->
+{% block main %} 
+{% include "html/components/table.html"%}
+{% endblock main %}
+
+<!-- prettier-ignore -->
+{% block footer %} 
+{% include "html/layouts/footer.html" %}
+{% endblock footer %}
+
+<!-- prettier-ignore -->
+{% bootstrap_javascript %} 
+
+{% comment %}
+<h1>{{ title }}</h1>
+<ul>
+  {% for obj in object_list %}
+  <li>
+    <a href="{% url detail_url_name obj.pk %}">{{ obj }}</a>
+  </li>
+  {% empty %}
+  <p>No hay {{ title }} inscritos.</p>
+  {% endfor %}
+</ul>
+{% endcomment %}
