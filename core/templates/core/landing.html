@@ -1,0 +1,174 @@
+{% extends "html/base.html" %}
+<!-- prettier-ignore -->
+{% load static %} 
+{% block title %}Inicio - VitalCare{% endblock title %}
+
+{% block header %}
+  {% include "html/layouts/navbar.html" %}
+{% endblock header %}
+
+{% block main %}
+<section class="landing-section landing-hero py-5 py-lg-6">
+  <div class="row align-items-center g-5 container mx-auto">
+    <div class="col-lg-6">
+      <h1 class="display-4 fw-semibold mb-3">
+        Organiza citas médicas de forma clara, rápida y confiable
+      </h1>
+
+      <p class="lead text-secondary mb-4">
+        VitalCare te ayuda a gestionar reservas, disponibilidad de profesionales
+        y seguimiento de atenciones en una sola plataforma. Diseñado para
+        clínicas, consultas y equipos de salud que necesitan una experiencia
+        simple y ordenada.
+      </p>
+
+      <div class="d-flex flex-wrap gap-2 mb-4">
+        {% if user.is_authenticated %}
+        <a
+          href="{% url 'schedule:index' %}"
+          class="btn btn-primary btn-lg px-4"
+        >
+          Ir a mi agenda
+        </a>
+        {% else %}
+        <a
+          href="{% url 'accounts:register' %}"
+          class="btn btn-primary btn-lg px-4"
+        >
+          Crear cuenta
+        </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div
+        class="card card-accent border-0 shadow-sm rounded-4 overflow-hidden"
+      >
+        <div class="card-body p-4 p-md-5">
+          <div class="d-flex align-items-center justify-content-between mb-4">
+            <div>
+              <h2 class="h4 text-white mb-0">
+                ¿Qué puedes hacer con VitalCare?
+              </h2>
+            </div>
+          </div>
+
+          <div class="d-grid gap-3">
+            <div class="d-flex gap-3 align-items-start p-3 rounded-4 bg-light">
+              <div class="fw-bold text-primary">01</div>
+              <div>
+                <div class="fw-semibold">Gestionar agendas médicas</div>
+                <p class="mb-0 text-secondary">
+                  Organiza citas por profesional, fecha y horario disponible.
+                </p>
+              </div>
+            </div>
+
+            <div class="d-flex gap-3 align-items-start p-3 rounded-4 bg-light">
+              <div class="fw-bold text-primary">02</div>
+              <div>
+                <div class="fw-semibold">
+                  Registrar pacientes y especialistas
+                </div>
+                <p class="mb-0 text-secondary">
+                  Mantén la información principal centralizada y accesible.
+                </p>
+              </div>
+            </div>
+
+            <div class="d-flex gap-3 align-items-start p-3 rounded-4 bg-light">
+              <div class="fw-bold text-primary">03</div>
+              <div>
+                <div class="fw-semibold">Evitar reservas duplicadas</div>
+                <p class="mb-0 text-secondary">
+                  La agenda protege horarios ya ocupados para cada profesional.
+                </p>
+              </div>
+            </div>
+
+            <div class="d-flex gap-3 align-items-start p-3 rounded-4 bg-light">
+              <div class="fw-bold text-primary">04</div>
+              <div>
+                <div class="fw-semibold">Escalar nuevas funcionalidades</div>
+                <p class="mb-0 text-secondary">
+                  Parte desde una base simple y crece con módulos futuros.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="landing-section landing-audiences pb-5">
+  <div class="row g-4 container mx-auto">
+    <div class="col-md-4">
+      <div class="h-100 p-4 border rounded-4 bg-white shadow-sm">
+        <h3 class="h5 mb-3">Para pacientes</h3>
+        <p class="text-secondary mb-0">
+          Consulta horarios disponibles, reserva tu atención y mantén un acceso
+          más simple a tu información de citas.
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="h-100 p-4 border rounded-4 bg-white shadow-sm">
+        <h3 class="h5 mb-3">Para profesionales</h3>
+        <p class="text-secondary mb-0">
+          Administra tu disponibilidad y revisa tus citas agendadas en una
+          interfaz clara y enfocada en la operación diaria.
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="h-100 p-4 border rounded-4 bg-white shadow-sm">
+        <h3 class="h5 mb-3">Para centros médicos</h3>
+        <p class="text-secondary mb-0">
+          Ordena procesos de agenda y construye una base tecnológica lista para
+          crecer con las necesidades del servicio.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="landing-section landing-cta py-5">
+  <div class="rounded-4 p-4 p-md-5 bg-secondary border container mx-auto">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-8">
+        <h2 class="h2 mb-3">
+          Una plataforma pensada para una gestión de salud más ordenada
+        </h2>
+        <p class="text-secondary mb-0">
+          VitalCare combina una experiencia simple con una estructura lista para
+          soportar agendas médicas, control de disponibilidad y crecimiento
+          progresivo del sistema.
+        </p>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        {% if user.is_authenticated %}
+        <a
+          href="{% url 'schedule:index' %}"
+          class="btn btn-primary btn-lg px-4"
+        >
+          Ver agenda
+        </a>
+        {% else %}
+        <a
+          href="{% url 'accounts:register' %}"
+          class="btn btn-primary btn-lg px-4"
+        >
+          Comenzar ahora
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock main %} {% block footer %} {% include "html/layouts/footer.html" %}
+{% endblock footer %}

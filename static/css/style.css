@@ -1,6 +1,137 @@
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    scroll-behavior: smooth;
+:root {
+  --primary: #144f7f;
+  --secondary: #4a8ce2;
+  --accent: #3f9496;
+  --soft: #8ed3e3;
+  --body: #f7fbfd;
+  --text-primary: #2c3e50;
+  --text-secondary: #6c7a89;
+  --padding-y: 0.6rem;
+
+  --bs-primary: var(--primary);
+  --bs-primary-rgb: 20, 79, 127;
+
+  --bs-secondary: var(--accent);
+  --bs-secondary-rgb: 63, 148, 150;
+
+  --bs-primary-bg: var(--primary);
+  --bs-secondary-bg: var(--accent);
 }
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  scroll-behavior: smooth;
+  --bs-body-bg: var(--body);
+  --bs-body-color: var(--text-primary);
+  --bs-heading-color: var(--primary);
+  --bs-body-font-family: "Inter", sans-serif;
+  --bs-link-color-rgb: 20, 79, 127;
+  --bs-link-hover-color-rgb: 74, 140, 226;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", serif;
+}
+
+.logo {
+  height: 40px;
+}
+
+.navbar .navbar-nav {
+  --bs-navbar-hover-color: var(--secondary);
+  --bs-navbar-active-color: var(--primary);
+}
+
+.form-logo {
+  --bs-border-color: var(--accent);
+}
+
+.logo-login {
+  height: 60px;
+  width: auto;
+}
+
+.card-form.card {
+  --bs-card-border-color: var(--soft);
+}
+
+input.form-control {
+  --bs-border-color: var(--soft);
+  padding-block: var(--padding-y);
+}
+
+.btn {
+  padding-block: var(--padding-y);
+}
+
+/* primario, hover secundario texto blanco */
+.btn.btn-primary {
+  --bs-btn-bg: var(--primary);
+  --bs-btn-border-color: var(--primary);
+  --bs-btn-hover-bg: var(--secondary);
+  --bs-btn-hover-border-color: var(--secondary);
+}
+
+/* button[type="submit"] {
+  padding-block: var(--padding-y);
+} */
+
+form button[type="submit"] {
+  width: 100%;
+}
+
+.btn.btn-outline-secondary {
+  --bs-btn-color: var(--secondary);
+  --bs-btn-border-color: var(--secondary);
+  --bs-btn-hover-bg: var(--secondary);
+  --bs-btn-hover-border-color: var(--secondary);
+  --bs-btn-active-bg: var(--secondary);
+  --bs-btn-active-border-color: var(--secondary);
+}
+
+.landing-hero {
+  background: linear-gradient(180deg, #f7fbfd 0%, #eef7fb 100%);
+}
+
+.landing-audiences {
+  background-color: #ffffff;
+}
+
+.landing-cta {
+  background-color: var(--secondary);
+}
+
+.landing-cta .rounded-4 {
+  background: linear-gradient(180deg, #f7fbfd 0%, #eaf6fa 100%) !important;
+}
+
+.card.card-accent {
+  background-color: var(--accent);
+}
+
+.table {
+  --bs-table-hover-bg: var(--soft);
+  --bs-table-striped-bg: #c5dde4;
+  --bs-table-color: var(--text-secondary);
+  --bs-table-striped-color: var(--text-secondary);
+}
+.table thead {
+  --bs-table-bg: var(--accent);
+  --bs-table-color: #fff;
+}
+.table > :not(:first-child) {
+  border-top-color: var(--soft);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+

@@ -1,47 +1,71 @@
 {% load django_bootstrap5 %}
-{% bootstrap_css %}
+{% load static %}
 
-<nav class="navbar navbar-expand-md navbar-dark fixed-top border-bottom border-light bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="{% url "schedule:index" %}">VitalCare</a>
+<nav class="navbar navbar-expand-md border-bottom border-light bg-white">
+    <div class="container-lg">
+        <a class="navbar-brand" href="{% url "landing" %}">
+            <img src="{% static "img/logo.png" %}" alt="Logo" class="logo">
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbar-collapse">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                {% if not user.is_authenticated %}
+            {% if not user.is_authenticated %}
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link{% if request.resolver_match.view_name == "accounts:login" %} active" aria-current="page"{% else %}"{% endif %} href="{% url "accounts:login" %}">Iniciar sesión</a>
+                        <a class="nav-link {% if request.resolver_match.view_name == 'accounts:login' %}active{% endif %}"
+                        {% if request.resolver_match.view_name == 'accounts:login' %}aria-current="page"{% endif %}
+                        href="{% url 'accounts:login' %}">
+                        Iniciar sesión
+                        </a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link{% if request.resolver_match.view_name == "accounts:register" %} active" aria-current="page"{% else %}"{% endif %} href="{% url "accounts:register" %}">Registrarse</a>
+                        <a class="nav-link {% if request.resolver_match.view_name == 'accounts:register' %}active{% endif %}"
+                        {% if request.resolver_match.view_name == 'accounts:register' %}aria-current="page"{% endif %}
+                        href="{% url 'accounts:register' %}">
+                        Registrarse
+                        </a>
                     </li>
+                </ul>
                 {% else %}
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Link</a>
+                        <a 
+                            class="nav-link {% if request.resolver_match.view_name == 'schedule:index' %}active{% endif %}" 
+                            {% if request.resolver_match.view_name == 'schedule:index' %}aria-current="page"{% endif %}
+                            href="{% url 'schedule:index' %}"
+                        >
+                            Agendar
+                        </a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Link</a>
+                        <a 
+                            class="nav-link {% if request.resolver_match.view_name == 'schedule:index_patient' %}active{% endif %}" 
+                            {% if request.resolver_match.view_name == 'schedule:index_patient' %}aria-current="page"{% endif %}
+                            href="{% url 'schedule:index_patient' %}"
+                        >
+                            Pacientes
+                        </a>
                     </li>
-                    {% comment %} <li class="nav-item">
-                        <a class="nav-link{% if request.resolver_match.view_name == "schedule:create_patient" %} active" aria-current="page"{% else %}"{% endif %} href="{% url "schedule:create_patient" %}">Registrar paciente</a>
-                    </li>
+                    
                     <li class="nav-item">
-                        <a class="nav-link{% if request.resolver_match.view_name == "schedule:create_provider" %} active" aria-current="page"{% else %}"{% endif %} href="{% url "schedule:create_provider" %}">Registrar especialista</a>
-                    </li> {% endcomment %}
-                    {% comment %} <li class="nav-item">
-                        <a class="nav-link{% if request.resolver_match.view_name == "schedule:create_appointment" %} active" aria-current="page"{% else %}"{% endif %} href="{% url "schedule:create_appointment" %}">Agendar cita</a>
-                    </li> {% endcomment %}
-                    {% comment %} <li class="nav-item">
-                        <form method="POST" action={% url "accounts:logout" %}>
-                            {% csrf_token %}
-                            {% bootstrap_button "Cerrar sesión" button_type="submit" button_class="btn btn-link nav-link" %}
-                        </form>
-                    </li> {% endcomment %}
+                        <a 
+                            class="nav-link {% if request.resolver_match.view_name == 'schedule:index_provider' %}active{% endif %}" 
+                            {% if request.resolver_match.view_name == 'schedule:index_provider' %}aria-current="page"{% endif %}
+                            href="{% url 'schedule:index_provider' %}"
+                        >
+                            Doctores
+                        </a>
+                    </li>
+                </ul>
+                
+                <form method="POST" action={% url "accounts:logout" %} class="ms-auto">
+                    {% csrf_token %}
+                    {% bootstrap_button "Cerrar sesión" button_type="submit" button_class="btn btn-outline-primary" %}
+                </form>
                 {% endif %}
-            </ul>
         </div>
     </div>
 </nav>
-
-{% bootstrap_javascript %}

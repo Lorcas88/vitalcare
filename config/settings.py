@@ -15,6 +15,7 @@ import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+STATICFILES_DIRS = [ BASE_DIR / "static" ]
 
 env = environ.Env(DEBUG=(bool, False))
 environ.Env.read_env(BASE_DIR / ".env")
@@ -41,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'schedule.apps.ScheduleConfig'
+    'core.apps.CoreConfig',
+    'schedule.apps.ScheduleConfig',
+    'accounts.apps.AccountsConfig'
 ]
 
 MIDDLEWARE = [
@@ -54,9 +57,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# LOGIN_URL = "accounts:login"
-# LOGIN_REDIRECT_URL = "schedule:index"
-# LOGOUT_REDIRECT_URL = "accounts:login"
+LOGIN_URL = "accounts:login"
+LOGIN_REDIRECT_URL = "schedule:index"
+LOGOUT_REDIRECT_URL = "accounts:login"
 
 ROOT_URLCONF = 'config.urls'
 
@@ -127,4 +130,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'

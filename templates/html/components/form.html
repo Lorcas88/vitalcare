@@ -1,50 +1,65 @@
-{% load django_bootstrap5 %}
-{% bootstrap_css %}
+{% load django_bootstrap5 %} {% load static %}
+<!-- prettier-ignore -->
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="card-form card bg-white shadow rounded-4 p-4">
+        <div class="card-body">
+          <!-- Logo -->
+          {% if request.resolver_match.view_name == "accounts:login" or request.resolver_match.view_name == "accounts:register" %}
+            <div
+              class="form-logo d-flex justify-content-center border-bottom border-3 py-4 mb-4"
+            >
+              <img
+                src="{% static 'img/logo.png' %}"
+                alt="VitalCare Logo"
+                class="logo-login"
+              />
+            </div>
+          {% endif %}
+          <!-- Título -->
+          <h2 class="text-center mb-4">{{ title }}</h2>
 
-<div class="container col-6">
-        <form method="POST">
+          <!-- Mensajes -->
+          {% comment %} {% bootstrap_messages %} {% endcomment %}
+
+          <!-- Formulario -->
+          <form method="POST" class="g-3 needs-validation" novalidate>
             {% csrf_token %}
 
-        {% if request.resolver_match.view_name != "schedule:delete_provider" and request.resolver_match.view_name != "schedule:delete_patient" and request.resolver_match.view_name != "schedule:delete_appointment" %}
-            {% bootstrap_form form %}
-        {% endif %}
+            {% if request.resolver_match.view_name != "schedule:delete_provider" and request.resolver_match.view_name != "schedule:delete_patient" and request.resolver_match.view_name != "schedule:delete_appointment" %}
+                {% bootstrap_form form %}
+            {% endif %}
+            
+            {% if request.resolver_match.view_name == "accounts:register" %}
+                {% bootstrap_button "Registrarse" button_type="submit" button_class="btn-primary" %}
 
-        {% if request.resolver_match.view_name == "accounts:register" %}
-            {% bootstrap_button "Registrarse" button_type="submit" button_class="btn-secondary" %}
+            {% elif request.resolver_match.view_name == "accounts:login" %}
+                {% bootstrap_button "Iniciar sesión" button_type="submit" button_class="btn-primary" %}
 
-        {% elif request.resolver_match.view_name == "accounts:login" %}
-            {% bootstrap_button "Iniciar sesión" button_type="submit" button_class="btn-secondary" %}
+            {% elif request.resolver_match.view_name == "schedule:create_provider" or request.resolver_match.view_name == "schedule:create_patient" or request.resolver_match.view_name == "schedule:create_appointment" %}
+                {% bootstrap_button "Publicar" button_type="submit" button_class="btn-success" %}
 
-        {% elif request.resolver_match.view_name == "schedule:create_provider" %}
-            {% bootstrap_button "Publicar" button_type="submit" button_class="btn-success" %}
+            {% elif request.resolver_match.view_name == "schedule:update_provider" or request.resolver_match.view_name == "schedule:update_patient" or request.resolver_match.view_name == "schedule:update_appointment" %}
+                {% bootstrap_button "Editar" button_type="submit" button_class="btn-warning" %}
 
-        {% elif request.resolver_match.view_name == "schedule:update_provider" %}
-            {% bootstrap_button "Editar" button_type="submit" button_class="btn-warning" %}
+            {% elif request.resolver_match.view_name == "schedule:delete_provider" or request.resolver_match.view_name == "schedule:delete_patient" or request.resolver_match.view_name == "schedule:delete_appointment" %}
+                {% bootstrap_button "Eliminar" button_type="submit" button_class="btn-danger" %}
 
-        {% elif request.resolver_match.view_name == "schedule:delete_provider" %}
-            {% bootstrap_button "Eliminar" button_type="submit" button_class="btn-danger" %}
+            {% endif %}
 
-        {% elif request.resolver_match.view_name == "schedule:create_patient" %}
-            {% bootstrap_button "Publicar" button_type="submit" button_class="btn-success" %}
+          </form>
 
-        {% elif request.resolver_match.view_name == "schedule:update_patient" %}
-            {% bootstrap_button "Editar" button_type="submit" button_class="btn-warning" %}
-
-        {% elif request.resolver_match.view_name == "schedule:delete_patient" %}
-            {% bootstrap_button "Eliminar" button_type="submit" button_class="btn-danger" %}
-
-        {% elif request.resolver_match.view_name == "schedule:create_appointment" %}
-            {% bootstrap_button "Publicar" button_type="submit" button_class="btn-success" %}
-
-        {% elif request.resolver_match.view_name == "schedule:update_appointment" %}
-            {% bootstrap_button "Editar" button_type="submit" button_class="btn-warning" %}
-
-        {% elif request.resolver_match.view_name == "schedule:delete_appointment" %}
-            {% bootstrap_button "Eliminar" button_type="submit" button_class="btn-danger" %}
-
-        {% endif %}
-
-    </form>
+          <!-- Enlaces -->
+          {% if request.resolver_match.view_name == "accounts:login" %}
+            <p class="text-center mt-4 text-secondary">
+              ¿No tienes cuenta?
+              <a href="/register" class="fw-bold">Regístrate aquí</a>
+            </p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-{% bootstrap_javascript %}

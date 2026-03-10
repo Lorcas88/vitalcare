@@ -1,0 +1,24 @@
+{% extends "html/base.html" %}
+<!-- prettier-ignore -->
+{% load static %}
+{% block title %}Registro - VitalCare{% endblock title %}
+
+{% block header %}
+{% include "html/layouts/navbar.html" %}
+{% endblock header %}
+
+<!-- prettier-ignore -->
+{% block main %}
+
+<!-- Mensajes -->
+{% comment %} {% bootstrap_messages %} {% endcomment %}
+<!-- prettier-ignore -->
+{% include "html/components/form.html" with title="Crear cuenta en VitalCare" %}
+
+{% endblock main %}
+
+<!-- prettier-ignore -->
+{% block footer %} 
+    {% include "html/layouts/footer.html" %}
+{% endblock footer %}
+

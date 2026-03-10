@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
 
-from datetime import datetime
 from django.core.exceptions import ValidationError
 
 from .config import AGENDA_CONFIG
@@ -33,14 +32,19 @@ class Person(models.Model):
         
 
 class Patient(Person):
-    pass
+    class Meta:
+        verbose_name = "paciente"
+        verbose_name_plural = "pacientes"
 
 
 class Provider(Person):
     specialty = models.ForeignKey(
-        Specialty,
-        on_delete=models.PROTECT
+        Specialty, verbose_name="Especialidad", on_delete=models.PROTECT
     )
+
+    class Meta:
+        verbose_name = "doctor"
+        verbose_name_plural = "doctores"
 
 
 class Appointment(models.Model):
@@ -50,7 +54,7 @@ class Appointment(models.Model):
     provider = models.ForeignKey(
         Provider, verbose_name="Especialista", related_name="provider", on_delete=models.PROTECT
     )
-    datetime_appt = models.DateTimeField()
+    datetime_appt = models.DateTimeField("Cita")
     reason = models.ForeignKey(
         Specialty, verbose_name="Motivo", related_name="reason", on_delete=models.PROTECT
     )
@@ -59,18 +63,28 @@ class Appointment(models.Model):
         constraints = [
             models.UniqueConstraint(fields=["provider", "datetime_appt"], name="unique_appointment")
         ]
+        verbose_name = "cita"
+        verbose_name_plural = "citas"
+    
 
     # https://docs.djangoproject.com/en/6.0/ref/models/instances/#django.db.models.Model.clean
     def clean(self):
         dt = self.datetime_appt
+        today = timezone.localtime(timezone.now())
+        
+        if dt.date() < today.date():
+            raise ValidationError("La reserva debe ser desde el día actual en adelante.")
+
+        if dt.date() == today.date() and dt.time() < today.time():
+            raise ValidationError("La reserva debe ser una hora mayor a la actual.")
         
         if dt.weekday() not in AGENDA_CONFIG["WORKING_DAYS"]:
-            raise ValidationError("No se pueden reservar citas ese día.")
+            raise ValidationError("Las citas deben ser días laborales.")
         
-        if not AGENDA_CONFIG["START_TIME"] <= self.datetime_appt < AGENDA_CONFIG["END_TIME"]:
+        if not AGENDA_CONFIG["START_TIME"] <= dt.time() < AGENDA_CONFIG["END_TIME"]:
             raise ValidationError("La cita está fuera del horario de atención.")
         
-        if dt.minute not in (0, 30):
+        if dt.minute % AGENDA_CONFIG["SLOT_MINUTES"] != 0:
             raise ValidationError("La cita debe coincidir con un bloque válido.")
         
     def __str__(self):

@@ -1,0 +1,20 @@
+{% extends "html/base.html" %}
+<!-- prettier-ignore -->
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+
+{% block header %}
+{% include "html/layouts/navbar.html" %}
+{% endblock header %}
+
+{% block main %}
+{% bootstrap_messages %}
+{% include "html/components/form.html" %}
+{% endblock main %}
+
+{% block footer %}
+{% include "html/layouts/footer.html" %}
+{% endblock footer %}
+
+{% bootstrap_javascript %}
+
