@@ -37,15 +37,15 @@
               </a>
             </td>
             <td>
-              <button class="btn p-0 m-0">
-                <i
-                  class="bi bi-trash cursor-pointer text-danger"
-                  data-id="{{row.pk}}"
-                  data-url="{% url table_config.delete_url_name row.pk %}"
-                  data-entity="{{table_config.delete_url_name}}"
-                  data-bs-toggle="modal"
-                  data-bs-target="#modal-delete"
-                ></i>
+              <button
+                class="btn p-0 m-0"
+                data-id="{{row.pk}}"
+                data-url="{% url table_config.delete_url_name row.pk %}"
+                data-entity="{{table_config.delete_url_name}}"
+                data-bs-toggle="modal"
+                data-bs-target="#modal-delete"
+              >
+                <i class="bi bi-trash text-danger"></i>
               </button>
             </td>
           </tr>

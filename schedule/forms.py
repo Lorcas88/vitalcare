@@ -42,11 +42,10 @@ class AppointmentForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
         self.fields["appt_time"].choices = generate_time_choices()
 
         # If it's updating an existing appointment
-        if self.instance and self.instance.pk and self.instance.datetime_appt:
+        if self.instance.pk and self.instance.datetime_appt:
             local_dt = timezone.localtime(self.instance.datetime_appt)
             self.fields["appt_date"].initial = local_dt.date()
             self.fields["appt_time"].initial = local_dt.strftime("%H:%M")
@@ -70,7 +69,6 @@ class AppointmentForm(forms.ModelForm):
         return cleaned_data
 
     def save(self, commit=True):
-        print("cleaned_data:", self.cleaned_data)
         instance = super().save(commit=False)
         instance.datetime_appt = self.cleaned_data["datetime_appt"]
 
