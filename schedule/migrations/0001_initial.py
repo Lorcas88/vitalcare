@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('first_name', models.CharField(max_length=50, verbose_name='Nombre')),
                 ('last_name', models.CharField(max_length=50, verbose_name='Apellido')),
-                ('date_birth', models.DateField(verbose_name='Fecha de nacimiento')),
+                ('date_of_birth', models.DateField(verbose_name='Fecha de nacimiento')),
             ],
         ),
         migrations.CreateModel(

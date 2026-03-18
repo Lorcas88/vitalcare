@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -20,3 +21,7 @@ class RegisterView(SuccessMessageMixin, CreateView):
         if request.user.is_authenticated:
             return redirect(settings.LOGIN_REDIRECT_URL)
         return super().dispatch(request, *args, **kwargs)
+
+    def form_invalid(self, form):
+        form.add_error(None, "Hubo un error en el registro. Revisa los datos.")
+        return super().form_invalid(form)

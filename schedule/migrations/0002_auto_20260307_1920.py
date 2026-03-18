@@ -30,14 +30,14 @@ def load_initial_data(apps, schema_editor):
     Provider.objects.get_or_create(
         first_name = "Martín",
         last_name = "González",
-        date_birth = date(2000, 2, 21),
+        date_of_birth = date(2000, 2, 21),
         specialty = specialty_objects["Medicina general"]
     )
 
     Patient.objects.get_or_create(
         first_name = "Lupita",
         last_name = "Merida",
-        date_birth = date(2010, 4, 21)
+        date_of_birth = date(2010, 4, 21)
     )
 
 def reverse_data(apps, schema_editor):

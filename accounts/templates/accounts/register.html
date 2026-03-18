@@ -1,4 +1,4 @@
-{% extends "html/base.html" %}
+{% extends "html/base.html" %} {% load django_bootstrap5 %}
 <!-- prettier-ignore -->
 {% load static %}
 {% block title %}Registro - VitalCare{% endblock title %}
@@ -9,12 +9,7 @@
 
 <!-- prettier-ignore -->
 {% block main %}
-
-<!-- Mensajes -->
-{% comment %} {% bootstrap_messages %} {% endcomment %}
-<!-- prettier-ignore -->
-{% include "html/components/form.html" with title="Crear cuenta en VitalCare" %}
-
+{% include "html/components/form.html" with title="Crear cuenta en VitalCare" %} 
 {% endblock main %}
 
 <!-- prettier-ignore -->

@@ -6,13 +6,15 @@ from django.utils import timezone
 from .service import generate_time_choices
 from .models import Patient, Provider, Appointment
 
-
 class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
         fields = "__all__"
         widgets = {
-            "date_birth": forms.DateInput(attrs={"type": "date"})
+            "date_of_birth": forms.DateInput(
+                format="%Y-%m-%d", 
+                attrs={"type": "date"}
+            )
         }
 
 
@@ -21,7 +23,10 @@ class ProviderForm(forms.ModelForm):
         model = Provider
         fields = "__all__"
         widgets = {
-            "date_birth": forms.DateInput(attrs={"type": "date"})
+            "date_of_birth": forms.DateInput(
+                format="%Y-%m-%d", 
+                attrs={"type": "date"}
+            )
         }
 
 

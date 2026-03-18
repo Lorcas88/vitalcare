@@ -16,17 +16,24 @@ class Specialty(models.Model):
 class Person(models.Model):
     first_name = models.CharField("Nombre", max_length=50)
     last_name = models.CharField("Apellido", max_length=50)
-    date_birth = models.DateField("Fecha de nacimiento")
+    date_of_birth = models.DateField("Fecha de nacimiento")
 
     @property
     def age(self):
         today = timezone.localdate()  # transform datetime to date
-        bday = self.date_birth
+        bday = self.date_of_birth
 
         # add a year if the actual month and day are less or equal
         age_adjustment = today.month <= bday.month and today.day <= bday.day
         return (today.year - bday.year) - age_adjustment
     
+    def clean(self):
+        bd = self.date_of_birth
+        today = timezone.localtime(timezone.now())
+
+        if bd > today.date():
+            raise ValidationError("La fecha de cumpleaños no puede estar en el futuro.")
+
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
         
